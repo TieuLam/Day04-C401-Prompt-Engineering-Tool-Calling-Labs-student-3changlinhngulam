@@ -1,1 +1,3 @@
 version,author,changed_artifact,artifact_version,prompt_hash,tools_hash,reason,hypothesis,metric_before,metric_after,run_file
+v0,M1,baseline,v0+peb1c8179815b+t6cdb53d5d7b8,eb1c8179815b,6cdb53d5d7b8,baseline,Đo hành vi chưa tối ưu trước khi sửa,,0.60,runs/v0_B_base_openai_20260602T144953773033.json
+v1,M1,system_prompt.md; tools.yaml,v1+p4754aed0a40b+t6f9e22e08571,4754aed0a40b,6f9e22e08571,Sai tool cho out-of-scope; tự đoán thông tin thiếu; gửi tin không xác nhận; ghép từ 'news' vào query; không gọi tool song song,Đưa ra bộ quy tắc hệ thống chi tiết cho từng nhóm hành vi trong system_prompt.md và thêm negative constraints vào tools.yaml,0.60,1.00,runs/v1_B_base_openai_20260602T153108349493.json
