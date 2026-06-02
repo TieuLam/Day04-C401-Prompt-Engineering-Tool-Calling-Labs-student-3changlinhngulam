@@ -20,7 +20,7 @@ def main():
     ARTIFACTS_DIR = ROOT / "artifacts"
     load_lab_env(ROOT)
     
-    provider = make_provider("gemini")
+    provider = make_provider("openai")
     
     system_prompt_path = ARTIFACTS_DIR / "system_prompt.md"
     system_prompt = system_prompt_path.read_text(encoding="utf-8") if system_prompt_path.exists() else "You are a helpful research agent."
@@ -41,7 +41,7 @@ def main():
             provider=provider,
             messages=messages,
             tools=openai_tools,
-            model=None,
+            model="vuduongcalvin/gemini-3.5-flash",
             max_tool_rounds=2
         )
         sys.stdout.close()

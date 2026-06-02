@@ -72,6 +72,12 @@ export default function Home() {
           role: 'agent',
           content: data.assistant_text,
         }]);
+      } else {
+        setMessages((prev) => [...prev, {
+          id: (Date.now() + 100).toString(),
+          role: 'agent',
+          content: '⚠️ Lỗi: Agent không trả về câu trả lời bằng văn bản (chuỗi rỗng). Có thể tác vụ đã bị hủy hoặc bị chặn bởi bộ lọc an toàn của mô hình.',
+        }]);
       }
     } catch (err) {
       setMessages((prev) => [...prev, {
