@@ -43,6 +43,66 @@
       "failure_type": "out_of_scope",
       "expect": {"no_tool": true, "behavior": "refuse"},
       "metadata": {"what_it_tests": "Yêu cầu gửi email nằm ngoài khả năng của agent, agent phải từ chối (refuse)."}
+    },
+    {
+      "id": "G06_multiturn_clarify_url",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Hãy đọc bài báo này giúp tôi"},
+        {"role": "user", "content": "Link đây: https://example.com/news/tech"},
+        {"role": "user", "content": "Chỉ tập trung vào 3 ý chính thôi nhé"}
+      ],
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "fetch", "args": {"url": "https://example.com/news/tech"}}]},
+      "metadata": {"what_it_tests": "Multiturn: Agent phải nhớ được URL cung cấp ở turn 2 để truyền vào tool fetch ở turn 3."}
+    },
+    {
+      "id": "G07_multiturn_carryover_topic",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Tìm các bài đăng về trí tuệ nhân tạo trên Twitter"},
+        {"role": "user", "content": "Thôi bỏ đi, chuyển sang tìm trên web đi"},
+        {"role": "user", "content": "Lấy tin tức mới nhất hôm nay nhé"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "lookup", "args": {"topic": "news", "timeframe": "day", "query": "trí tuệ nhân tạo"}}]},
+      "metadata": {"what_it_tests": "Multiturn: Chuyển hướng từ social_search sang lookup (web), phải carry over chủ đề 'trí tuệ nhân tạo'."}
+    },
+    {
+      "id": "G08_multiturn_correction_limit",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Lấy 10 bài tweet gần đây của @OpenAI"},
+        {"role": "user", "content": "À thôi, chỉ lấy 2 bài thôi"},
+        {"role": "user", "content": "Vẫn là của OpenAI nhé"}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "OpenAI", "limit": 2}}]},
+      "metadata": {"what_it_tests": "Multiturn: Agent phải sửa limit từ 10 thành 2 dựa trên correction ở turn 2."}
+    },
+    {
+      "id": "G09_multiturn_timeline_correction",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Mọi người nói gì về Apple hôm nay?"},
+        {"role": "user", "content": "Không, ý tôi là bài đăng của chính tài khoản @Apple cơ"},
+        {"role": "user", "content": "Tìm bài đăng mới nhất"}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "timeline", "args": {"screenname": "Apple"}}]},
+      "metadata": {"what_it_tests": "Multiturn: Chuyển từ social_search sang timeline do user đính chính là muốn bài của chính tài khoản."}
+    },
+    {
+      "id": "G10_multiturn_out_of_scope",
+      "phase": "B",
+      "turns": [
+        {"role": "user", "content": "Giúp tôi lập trình web"},
+        {"role": "user", "content": "Chỉ là một trang HTML đơn giản thôi mà"},
+        {"role": "user", "content": "Làm giúp tôi nhé"}
+      ],
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true, "behavior": "refuse"},
+      "metadata": {"what_it_tests": "Multiturn: Yêu cầu code nằm ngoài phạm vi research, agent vẫn phải từ chối dù user nài nỉ qua nhiều turn."}
     }
   ]
 }
