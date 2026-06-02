@@ -1,0 +1,638 @@
+{
+  "run_id": "v3_B_group_openai_20260602T164705391436",
+  "version": "v3",
+  "artifact_version": "v3+pa616fea3104b+t024bd9589a0a",
+  "prompt_hash": "a616fea3104b2bf5f9f0ef9d6e8a1788c296d308216e3443c2b9613453a1f20b",
+  "tools_hash": "024bd9589a0a7286e807d8c2d43af4d44b40d71528af98bb5f76053c57187b2b",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openai",
+  "model": "vuduongcalvin/gemini-3.5-flash",
+  "system_prompt": "C:\\Vin\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Vin\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_group_m2_tools",
+  "dataset_role": "group",
+  "description": "Group eval cases for M2 added tools: url_cleaner, source_quality, extract_entities, dedupe_sources.",
+  "generated_at": "2026-06-02T16:47:05",
+  "summary": {
+    "total_cases": 8,
+    "measured_cases": 8,
+    "provider_error_cases": 0,
+    "passed_cases": 7,
+    "case_accuracy": 0.875,
+    "tool_routing_accuracy": 0.875,
+    "argument_accuracy": 0.875,
+    "multiturn_accuracy": null,
+    "failure_counts": {
+      "wrong_tool": 1
+    },
+    "observed_mismatch_counts": {
+      "missing_tool_call": 1
+    }
+  },
+  "results": [
+    {
+      "id": "G01_url_cleaner_tracking_params",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "url_cleaning"
+      },
+      "input": "Làm sạch link này trước khi đưa vào citation: https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "url": "https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "keep_params": [
+                "id"
+              ],
+              "remove_fragment": true,
+              "url": "https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "url_cleaner",
+          "args": {
+            "keep_params": [
+              "id"
+            ],
+            "remove_fragment": true,
+            "url": "https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments"
+          },
+          "result": {
+            "tool": "clean_url",
+            "original_url": "https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments",
+            "clean_url": "https://example.com/article?id=123",
+            "is_valid": true,
+            "domain": "example.com",
+            "removed_params": [
+              "utm_source",
+              "utm_medium",
+              "fbclid"
+            ],
+            "removed_count": 3,
+            "fragment_removed": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "G02_url_cleaner_plain_domain",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "url_cleaning"
+      },
+      "input": "Chuẩn hóa URL này giúp mình trước khi fetch: example.com/news?id=7&utm_campaign=test",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "url": "example.com/news?id=7&utm_campaign=test"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "keep_params": [
+                "id"
+              ],
+              "url": "example.com/news?id=7&utm_campaign=test"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "url_cleaner",
+          "args": {
+            "keep_params": [
+              "id"
+            ],
+            "url": "example.com/news?id=7&utm_campaign=test"
+          },
+          "result": {
+            "tool": "clean_url",
+            "original_url": "example.com/news?id=7&utm_campaign=test",
+            "clean_url": "https://example.com/news?id=7",
+            "is_valid": true,
+            "domain": "example.com",
+            "removed_params": [
+              "utm_campaign"
+            ],
+            "removed_count": 1,
+            "fragment_removed": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "G03_source_quality_medical",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_quality"
+      },
+      "input": "Đánh giá chất lượng nguồn này cho một claim y tế: https://www.who.int/news-room",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "url": "https://www.who.int/news-room",
+              "claim_type": "medical"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "claim_type": "medical",
+              "url": "https://www.who.int/news-room"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "source_quality",
+          "args": {
+            "claim_type": "medical",
+            "url": "https://www.who.int/news-room"
+          },
+          "result": {
+            "tool": "assess_source_quality",
+            "url": "https://www.who.int/news-room",
+            "domain": "who.int",
+            "source_type": "official_or_organization",
+            "quality_score": 5,
+            "claim_type": "medical",
+            "warnings": [],
+            "recommendation": "Strong source candidate. Still verify the exact claim and date."
+          }
+        }
+      ]
+    },
+    {
+      "id": "G04_source_quality_shortlink",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_quality"
+      },
+      "input": "Nguồn bit.ly/ai-report này có đáng tin để dùng trong report không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "url": "bit.ly/ai-report"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": false,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "fetch",
+            "args": {
+              "url": "https://bit.ly/ai-report"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "missing_tool_call",
+        "failure_type": "wrong_tool",
+        "failures": [
+          "missing tool call source_quality",
+          "extra tool call fetch"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "fetch",
+          "args": {
+            "url": "https://bit.ly/ai-report"
+          },
+          "result": {
+            "tool": "read_url",
+            "url": "https://bit.ly/ai-report",
+            "items": [
+              {
+                "title": "Bitly | bit.ly/25k6LNN",
+                "url": "https://bit.ly/ai-report",
+                "source": "bit.ly",
+                "summary": "# Here's a preview of your destination\n\n[Continue to destination![Continue Icon](https://d1ayxb9ooonjts.cloudfront.net/d/8955792E2AE2972C05969B26C881AD988C9BB5BD.svg)](https://docs.google.com/spreadsheets/d/1iGKXA_afoamN-hybc7dWtLQUNg86sk_RLgB0oTWGYCI/edit?usp=sharing)\n\nYou'll be redirected in 8\nseconds...\n\n\n[Continue to destination![Continue Icon](https://d1ayxb9ooonjts.cloudfront.net/d/8955792E2AE2972C05969B26C881AD988C9BB5BD.svg)](https://docs.google.com/spreadsheets/d/1iGKXA_afoamN-hybc7dWtLQUNg86sk_RLgB0oTWGYCI/edit?usp=sharing)\n\nYou'll be redirected in 8\nseconds..."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G05_extract_entities_text",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "entity_extraction"
+      },
+      "input": "Trích xuất entity trong đoạn này: VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "text": "VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD."
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "text": "VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD."
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "extract_entities",
+          "args": {
+            "text": "VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD."
+          },
+          "result": {
+            "tool": "extract_entities",
+            "urls": [
+              "https://vinuni.edu.vn"
+            ],
+            "emails": [
+              "ai@vinuni.edu.vn"
+            ],
+            "dates": [
+              "28/05/2026"
+            ],
+            "money": [
+              "100 USD"
+            ],
+            "hashtags": [],
+            "mentions": [],
+            "possible_organizations": [],
+            "counts": {
+              "urls": 1,
+              "emails": 1,
+              "dates": 1,
+              "money": 1,
+              "hashtags": 0,
+              "mentions": 0,
+              "possible_organizations": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "G06_extract_entities_max_items",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "entity_extraction"
+      },
+      "input": "Lấy tối đa 5 entity mỗi loại từ đoạn sau: Email support@example.com, ngày 2026-06-02, link https://example.com, hashtag #AI.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "max_items": 5
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "max_items": 5,
+              "text": "Email support@example.com, ngày 2026-06-02, link https://example.com, hashtag #AI."
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "extract_entities",
+          "args": {
+            "max_items": 5,
+            "text": "Email support@example.com, ngày 2026-06-02, link https://example.com, hashtag #AI."
+          },
+          "result": {
+            "tool": "extract_entities",
+            "urls": [
+              "https://example.com"
+            ],
+            "emails": [
+              "support@example.com"
+            ],
+            "dates": [
+              "2026-06-02"
+            ],
+            "money": [],
+            "hashtags": [
+              "#AI"
+            ],
+            "mentions": [],
+            "possible_organizations": [],
+            "counts": {
+              "urls": 1,
+              "emails": 1,
+              "dates": 1,
+              "money": 0,
+              "hashtags": 1,
+              "mentions": 0,
+              "possible_organizations": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "G07_dedupe_sources_by_url",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_deduplication"
+      },
+      "input": "Loại trùng danh sách nguồn sau theo URL: [{\"title\":\"AI news\",\"url\":\"https://example.com/a?utm_source=x\"}, {\"title\":\"AI news\",\"url\":\"https://example.com/a\"}, {\"title\":\"Other report\",\"url\":\"https://another.com/report\"}]",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "unique_by": "url"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "items": [
+                {
+                  "title": "AI news",
+                  "url": "https://example.com/a?utm_source=x"
+                },
+                {
+                  "title": "AI news",
+                  "url": "https://example.com/a"
+                },
+                {
+                  "title": "Other report",
+                  "url": "https://another.com/report"
+                }
+              ],
+              "unique_by": "url"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "dedupe_sources",
+          "args": {
+            "items": [
+              {
+                "title": "AI news",
+                "url": "https://example.com/a?utm_source=x"
+              },
+              {
+                "title": "AI news",
+                "url": "https://example.com/a"
+              },
+              {
+                "title": "Other report",
+                "url": "https://another.com/report"
+              }
+            ],
+            "unique_by": "url"
+          },
+          "result": {
+            "tool": "dedupe_sources",
+            "unique_by": "url",
+            "unique_items": [
+              {
+                "title": "AI news",
+                "url": "https://example.com/a",
+                "source": "example.com"
+              },
+              {
+                "title": "Other report",
+                "url": "https://another.com/report",
+                "source": "another.com"
+              }
+            ],
+            "input_count": 3,
+            "unique_count": 2,
+            "removed_count": 1,
+            "duplicate_group_count": 1,
+            "duplicate_keys": [
+              "https://example.com/a"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "G08_dedupe_sources_by_domain",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_deduplication"
+      },
+      "input": "Trong danh sách nguồn này, chỉ giữ một nguồn mỗi domain: [{\"title\":\"Report 1\",\"url\":\"https://example.com/a\"}, {\"title\":\"Report 2\",\"url\":\"https://example.com/b\"}, {\"title\":\"Report 3\",\"url\":\"https://openai.com/news\"}]",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "unique_by": "domain"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "items": [
+                {
+                  "title": "Report 1",
+                  "url": "https://example.com/a"
+                },
+                {
+                  "title": "Report 2",
+                  "url": "https://example.com/b"
+                },
+                {
+                  "title": "Report 3",
+                  "url": "https://openai.com/news"
+                }
+              ],
+              "unique_by": "domain"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "dedupe_sources",
+          "args": {
+            "items": [
+              {
+                "title": "Report 1",
+                "url": "https://example.com/a"
+              },
+              {
+                "title": "Report 2",
+                "url": "https://example.com/b"
+              },
+              {
+                "title": "Report 3",
+                "url": "https://openai.com/news"
+              }
+            ],
+            "unique_by": "domain"
+          },
+          "result": {
+            "tool": "dedupe_sources",
+            "unique_by": "domain",
+            "unique_items": [
+              {
+                "title": "Report 1",
+                "url": "https://example.com/a",
+                "source": "example.com"
+              },
+              {
+                "title": "Report 3",
+                "url": "https://openai.com/news",
+                "source": "openai.com"
+              }
+            ],
+            "input_count": 3,
+            "unique_count": 2,
+            "removed_count": 1,
+            "duplicate_group_count": 1,
+            "duplicate_keys": [
+              "example.com"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
