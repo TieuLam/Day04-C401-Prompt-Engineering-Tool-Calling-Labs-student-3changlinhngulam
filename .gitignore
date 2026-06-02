@@ -27,3 +27,6 @@ Thumbs.db
 **/.next/
 **/build/
 **/out/
+
+# Temporary directories
+.tmp/

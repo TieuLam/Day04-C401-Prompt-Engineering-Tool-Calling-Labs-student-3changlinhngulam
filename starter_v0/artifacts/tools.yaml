@@ -9,13 +9,13 @@
 tools:
   # ---------------- Core tools ----------------
   - name: clarify
-    description: "Gửi một câu hỏi cho người dùng."
+    description: "Yêu cầu làm rõ thông tin thiếu hoặc xác nhận hành động trước khi thực hiện. Bắt buộc gọi khi thiếu tên tài khoản Twitter, thiếu link bài viết cần đọc, hoặc cần người dùng xác nhận có đồng ý gửi tin nhắn đi hay không."
     parameters:
       type: object
       properties:
-        question: {type: string, default: "", description: "Câu hỏi"}
-        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu trả lời"}
-        options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn"}
+        question: {type: string, default: "", description: "Câu hỏi gửi người dùng."}
+        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu phản hồi mong đợi: 'text' cho làm rõ thông tin thiếu, 'yes_no' cho xác nhận đồng ý gửi/thực hiện."}
+        options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn nếu có."}
       required: [question]
 
   - name: timeline
@@ -38,14 +38,14 @@ tools:
       required: [query]
 
   - name: lookup
-    description: "Tra cứu thông tin trên internet."
+    description: "Tra cứu thông tin hoặc tin tức thời sự trên internet. Tuyệt đối không ghép chữ 'news' hoặc 'tin tức' vào trong từ khóa tham số query khi chọn topic='news'."
     parameters:
       type: object
       properties:
-        query: {type: string, default: "", description: "Truy vấn"}
-        topic: {type: string, enum: [general, news], default: "general", description: "Phân loại"}
-        timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "Khoảng thời gian"}
-        max_results: {type: integer, default: 5, description: "Số kết quả"}
+        query: {type: string, default: "", description: "Từ khóa tìm kiếm sạch (ví dụ: 'AI' thay vì 'AI news')."}
+        topic: {type: string, enum: [general, news], default: "general", description: "Phân loại chủ đề tìm kiếm."}
+        timeframe: {type: string, enum: [day, week, month, year], default: "week", description: "Thời gian giới hạn của tin tức."}
+        max_results: {type: integer, default: 5, description: "Số lượng kết quả."}
       required: [query]
 
   - name: fetch
