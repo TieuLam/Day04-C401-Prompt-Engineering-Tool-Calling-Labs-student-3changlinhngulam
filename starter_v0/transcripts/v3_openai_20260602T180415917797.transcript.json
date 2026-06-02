@@ -1,0 +1,28 @@
+{
+  "transcript_id": "v3_openai_20260602T180415917797",
+  "version": "v3",
+  "artifact_version": "v3+p1d15837fee27+t9299e2fd3a01",
+  "prompt_hash": "1d15837fee2795705f984e2e39fd7f427685c3aed22ac84dfaee0176af9f9349",
+  "tools_hash": "9299e2fd3a0120c35867e02565edfe8627999fb14124935957a67a2737b0e277",
+  "provider": "openai",
+  "model": "vuduongcalvin/gemini-3.5-flash",
+  "system_prompt": "D:\\Study\\VinUni-Ai-Thuc-Chien\\Ngày 4\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\Study\\VinUni-Ai-Thuc-Chien\\Ngày 4\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "created_at": "2026-06-02T18:04:15",
+  "updated_at": "2026-06-02T18:04:47",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T18:04:43",
+      "user": "Tin tá»©c AI hÃ´m nay cÃ³ gÃ¬ hot?",
+      "status": "provider_error",
+      "assistant_text": null,
+      "rounds": [],
+      "tool_events": [],
+      "error": "UnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f527' in position 0: character maps to <undefined>",
+      "ended_at": "2026-06-02T18:04:47"
+    }
+  ]
+}

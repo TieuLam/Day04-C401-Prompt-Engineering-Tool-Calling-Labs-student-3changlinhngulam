@@ -1,0 +1,505 @@
+{
+  "transcript_id": "v3_openai_20260602T180731072042",
+  "version": "v3",
+  "artifact_version": "v3+p1d15837fee27+t9299e2fd3a01",
+  "prompt_hash": "1d15837fee2795705f984e2e39fd7f427685c3aed22ac84dfaee0176af9f9349",
+  "tools_hash": "9299e2fd3a0120c35867e02565edfe8627999fb14124935957a67a2737b0e277",
+  "provider": "openai",
+  "model": "vuduongcalvin/gemini-3.5-flash",
+  "system_prompt": "D:\\Study\\VinUni-Ai-Thuc-Chien\\Ngày 4\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\Study\\VinUni-Ai-Thuc-Chien\\Ngày 4\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "created_at": "2026-06-02T18:07:31",
+  "updated_at": "2026-06-02T18:08:21",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-06-02T18:07:31",
+      "user": "T?m tin t?c AI h?m nay c? g? hot?",
+      "status": "answered",
+      "assistant_text": "Dưới đây là tổng hợp các tin tức nổi bật về trí tuệ nhân tạo (AI) trong ngày hôm nay:\n\n### **1. Quảng cáo & Kinh tế AI**\n* **AI dự kiến thúc đẩy 18 tỷ bảng chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030:** Dự báo từ IAB UK cho thấy AI sẽ chi phối khoảng 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030. Sự tăng trưởng này chủ yếu đến từ việc áp dụng các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và các giao dịch tự động (agentic programmatic buying). Chi tiết xem tại [Marketing Week](https://www.marketingweek.com/iab-uk-ai-ad-spend/).\n\n### **2. Hiệu quả đầu tư AI**\n* **Doanh nghiệp thất vọng vì AI không giúp tiết kiệm chi phí như kỳ vọng:** Báo cáo mới từ Bain & Company chỉ ra một thực tế đáng lo ngại: khoảng 40% doanh nghiệp theo dõi chi tiêu AI ghi nhận mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng ban đầu là 20%. Nguyên nhân lớn nhất được chỉ ra là do các doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa nguồn dữ liệu nội bộ của chính mình. Dù vậy, 90% doanh nghiệp vẫn có kế hoạch tiếp tục tăng ngân sách cho AI vào năm tới. Chi tiết xem tại [PitchBook](https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver).\n\n### **3. Tin tức Công nghệ & Doanh nghiệp**\n* **Anthropic nộp đơn IPO & Nvidia ra mắt giả lập robot mới:** \n  * Công ty khởi nghiệp AI đình đám **Anthropic** đã chính thức nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO).\n  * Trong khi đó, gã khổng lồ chip **Nvidia** vừa ra mắt một mô hình giả lập thế giới mới (world model simulator) dành cho robot cùng nền tảng thiết kế mới hỗ trợ các nhà phát triển robot, tiếp tục củng cố vị thế thống trị của mình. Chi tiết xem tại [The Washington Post](https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/).\n\n### **4. Ứng dụng Ngành nghề**\n* **AI tái định hình ngành du lịch toàn cầu:** Báo cáo mới từ Skift cho thấy ngành công nghiệp du lịch đang được tái cấu trúc toàn diện từ gốc rễ. Các trợ lý AI thông minh và trải nghiệm tự động (agentic experiences) đang thay đổi hoàn toàn cách du khách tìm kiếm thông tin, đặt chỗ và quản lý lịch trình chuyến đi của họ. Chi tiết xem tại [Skift](https://skift.com/insights/the-ai-rebuild-of-travel/).",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "lookup",
+              "args": {
+                "query": "AI",
+                "timeframe": "day",
+                "topic": "news"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "lookup",
+              "args": {
+                "query": "AI",
+                "timeframe": "day",
+                "topic": "news"
+              },
+              "result": {
+                "tool": "web_search",
+                "query": "AI",
+                "topic": "news",
+                "timeframe": "day",
+                "items": [
+                  {
+                    "title": "AI expected to drive £18bn of UK digital ad spend by 2030 - Marketing Week",
+                    "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                    "source": "marketingweek.com",
+                    "summary": "# AI expected to drive £18bn of UK digital ad spend by 2030. IAB UK forecasts AI will drive one-third of UK digital ad spend by 2030 as advertisers adapt to changes in search, content and media buying. One-third (32%) of UK digital ad spend, equivalent to around £18bn, will be AI-driven by 2030, according to new forecasts from IAB UK. According to ‘The State of AI in Advertising: Charting the Shift from Automation to Autonomy, ‘ AI is expected to influence ad spend across four key areas– content creation, zero-click search, agentic trading and agentic commerce. To estimate the likely scale of change, IAB UK developed a series of ‘AI overlays’ that estimate the proportion of media spend by channel that is ‘AI-driven’, defined as a media buying and delivery decision made by an AI-powered algorithm. IAB UK forecasts most of the growth will come from the adoption of AI buying tools in search, such as Google’s AI Max and PMax; social, including Meta’s Advantage+; and display advertising through agentic programmatic buying.",
+                    "score": 0.3331999
+                  },
+                  {
+                    "title": "40% of executives thought AI could save up to 20%. It didn’t deliver. - PitchBook",
+                    "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver",
+                    "source": "pitchbook.com",
+                    "summary": "## The gap between AI spending and productivity gains “should be making executives uncomfortable,” a Bain report found. Corporates are beefing up their AI budgets but seeing lackluster productivity gains, according to the latest Bain & Company report. Bain’s Automation and AI Pathfinder Survey 2026, which had 951 respondents, found that 40% of the companies that tracked their spending recorded cost savings of less than 10% from their AI initiatives. Still, 90% of those surveyed whose AI investments underdelivered plan to increase their AI budgets next year. As compute and usage costs have risen dramatically, executives and shareholders are taking a closer look at the returns that those investments have brought so far. A PitchBook analysis of 186 AI-related questions on B2C earnings calls found that 90% were probing and investigative in tone, and that ROI and financial returns have overtaken product roadmaps as the dominant focus. Employees’ use of AI tools can range from coding assistants to AI-generated research to organizing unstructured databases.",
+                    "score": 0.26990628
+                  },
+                  {
+                    "title": "AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan - The Washington Post",
+                    "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/",
+                    "source": "washingtonpost.com",
+                    "summary": "AI & Tech Brief from WP Intelligence. # AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan. Plus, Anthropic files for a blockbuster initial public offering. Make us preferred on Google. Sign up here to get this newsletter in your inbox. * **Exclusive:** AI safety group Americans for Responsible Innovation rolls out a six-figure ad campaign this week attacking Rep. Lori Trahan (D-Massachusetts), arguing that she’s “taking the side” of AI oligarchs in her bipartisan legislative efforts. * The AI safety community doesn’t want to hand power of AI regulation to President Donald Trump’s administration now that states are passing more rigorous AI laws — and the California and New York attorneys general are challenging big AI companies. * Nvidia is rolling out a new “world model” simulator for robots and a new design platform for robot developers. In doing so, the company is running the same business playbook it did to become so dominant in the chip market.",
+                    "score": 0.23527569
+                  },
+                  {
+                    "title": "AI Savings Misses ‘Should Be Making Executives Uncomfortable,’ Bain Says - Insurance Journal",
+                    "url": "https://www.insurancejournal.com/news/national/2026/06/01/871951.htm",
+                    "source": "insurancejournal.com",
+                    "summary": "The missed targets “should be making executives uncomfortable,” especially since many of them are approving increased spending for artificial intelligence on the basis of expected savings, the consulting firm said in a report shared exclusively with Bloomberg News. While some companies are funding fresh investment in generative and agentic AI with realized savings, the largest share (44%) cited targeted savings among their top sources of funding for the next wave of outlays, according to the report. “Despite a decade of investments in data modernization running well into hundreds of billions of dollars globally, the No. 1 reason AI programs underperform is that companies cannot reliably get access to their own data,” Bain said. Its prescription: Instead of waiting to structure all of their data to make it ingestible by AI, companies should start with what’s available to feed into the models — and then use AI to help sort out how to structure the rest.",
+                    "score": 0.22715242
+                  },
+                  {
+                    "title": "New Report: The AI Rebuild of Travel - Skift",
+                    "url": "https://skift.com/insights/the-ai-rebuild-of-travel/",
+                    "source": "skift.com",
+                    "summary": "# New Report: The AI Rebuild of Travel. Travel technology is being rebuilt in real time as AI begins to shape how trips are discovered, booked, and managed. And systems built for websites and manual workflows are struggling to keep pace with a more connected, autonomous future. What once operated as a predictable digital journey is becoming an AI-mediated ecosystem powered by real-time data, interoperability, and increasingly intelligent systems. Skift Studio spoke with 10 senior technology, product, and digital leaders across airlines, hospitality companies, travel platforms, and technology providers to understand how the industry is preparing. One thing is clear: the next era of travel will be defined by infrastructure as much as interface. **Download the report to learn:**. * How AI assistants and agentic experiences are reshaping travel discovery and booking. * Why trust, governance, and identity are becoming central to AI-powered travel. * How airlines, hotels, and platforms are preparing for a more autonomous future.",
+                    "score": 0.20429464
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "format",
+              "args": {
+                "headline": "Tin tức AI nổi bật hôm nay",
+                "items": [
+                  {
+                    "section": "Quảng cáo & Kinh tế AI",
+                    "source": "Marketing Week",
+                    "summary": "Dự báo từ IAB UK cho thấy AI sẽ thúc đẩy 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030 (tương đương 18 tỷ bảng Anh), thông qua các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và giao dịch tự động (agentic programmatic buying).",
+                    "title": "AI dự kiến thúc đẩy 18 tỷ bảng chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030",
+                    "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/"
+                  },
+                  {
+                    "section": "Hiệu quả đầu tư AI",
+                    "source": "PitchBook & Insurance Journal",
+                    "summary": "Báo cáo mới từ Bain & Company chỉ ra rằng 40% doanh nghiệp theo dõi chi tiêu AI chỉ đạt mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng 20%. Nguyên nhân lớn nhất là do doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa dữ liệu nội bộ. Dù vậy, 90% doanh nghiệp vẫn có kế hoạch tăng ngân sách AI vào năm tới.",
+                    "title": "Doanh nghiệp thất vọng vì AI không giúp tiết kiệm chi phí như kỳ vọng",
+                    "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver"
+                  },
+                  {
+                    "section": "Tin tức Công nghệ & Doanh nghiệp",
+                    "source": "The Washington Post",
+                    "summary": "Anthropic đã nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO). Trong khi đó, Nvidia ra mắt mô hình giả lập thế giới mới (world model simulator) dành cho robot và nền tảng thiết kế mới cho các nhà phát triển robot. Ngoài ra, một nhóm an toàn AI đã khởi động chiến dịch quảng cáo chỉ trích Hạ nghị sĩ Lori Trahan vì các nỗ lực lập pháp của bà.",
+                    "title": "Anthropic nộp đơn IPO; Nvidia ra mắt giả lập robot mới",
+                    "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/"
+                  },
+                  {
+                    "section": "Ứng dụng Ngành nghề",
+                    "source": "Skift",
+                    "summary": "Báo cáo mới từ Skift cho thấy ngành du lịch đang được tái cấu trúc toàn diện nhờ AI. Các trợ lý AI và trải nghiệm tự động (agentic experiences) đang định hình lại cách du khách tìm kiếm, đặt chỗ và quản lý các chuyến đi.",
+                    "title": "AI tái định hình ngành du lịch toàn cầu",
+                    "url": "https://skift.com/insights/the-ai-rebuild-of-travel/"
+                  }
+                ],
+                "template": "daily_ai_vn"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "format",
+              "args": {
+                "headline": "Tin tức AI nổi bật hôm nay",
+                "items": [
+                  {
+                    "section": "Quảng cáo & Kinh tế AI",
+                    "source": "Marketing Week",
+                    "summary": "Dự báo từ IAB UK cho thấy AI sẽ thúc đẩy 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030 (tương đương 18 tỷ bảng Anh), thông qua các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và giao dịch tự động (agentic programmatic buying).",
+                    "title": "AI dự kiến thúc đẩy 18 tỷ bảng chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030",
+                    "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/"
+                  },
+                  {
+                    "section": "Hiệu quả đầu tư AI",
+                    "source": "PitchBook & Insurance Journal",
+                    "summary": "Báo cáo mới từ Bain & Company chỉ ra rằng 40% doanh nghiệp theo dõi chi tiêu AI chỉ đạt mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng 20%. Nguyên nhân lớn nhất là do doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa dữ liệu nội bộ. Dù vậy, 90% doanh nghiệp vẫn có kế hoạch tăng ngân sách AI vào năm tới.",
+                    "title": "Doanh nghiệp thất vọng vì AI không giúp tiết kiệm chi phí như kỳ vọng",
+                    "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver"
+                  },
+                  {
+                    "section": "Tin tức Công nghệ & Doanh nghiệp",
+                    "source": "The Washington Post",
+                    "summary": "Anthropic đã nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO). Trong khi đó, Nvidia ra mắt mô hình giả lập thế giới mới (world model simulator) dành cho robot và nền tảng thiết kế mới cho các nhà phát triển robot. Ngoài ra, một nhóm an toàn AI đã khởi động chiến dịch quảng cáo chỉ trích Hạ nghị sĩ Lori Trahan vì các nỗ lực lập pháp của bà.",
+                    "title": "Anthropic nộp đơn IPO; Nvidia ra mắt giả lập robot mới",
+                    "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/"
+                  },
+                  {
+                    "section": "Ứng dụng Ngành nghề",
+                    "source": "Skift",
+                    "summary": "Báo cáo mới từ Skift cho thấy ngành du lịch đang được tái cấu trúc toàn diện nhờ AI. Các trợ lý AI và trải nghiệm tự động (agentic experiences) đang định hình lại cách du khách tìm kiếm, đặt chỗ và quản lý các chuyến đi.",
+                    "title": "AI tái định hình ngành du lịch toàn cầu",
+                    "url": "https://skift.com/insights/the-ai-rebuild-of-travel/"
+                  }
+                ],
+                "template": "daily_ai_vn"
+              },
+              "result": {
+                "tool": "render_digest",
+                "template": "daily_ai_vn",
+                "markdown": "**Tin tức AI nổi bật hôm nay**\n\n**Quảng cáo & Kinh tế AI**\n- Dự báo từ IAB UK cho thấy AI sẽ thúc đẩy 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030 (tương đương 18 tỷ bảng Anh), thông qua các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và giao dịch tự động (agentic programmatic buying). - [Marketing Week](https://www.marketingweek.com/iab-uk-ai-ad-spend/)\n\n**Hiệu quả đầu tư AI**\n- Báo cáo mới từ Bain & Company chỉ ra rằng 40% doanh nghiệp theo dõi chi tiêu AI chỉ đạt mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng 20%. Nguyên nhân lớn nhất là do doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa dữ liệu nội bộ. Dù vậy, 90% doanh ng... - [PitchBook & Insurance Journal](https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver)\n\n**Tin tức Công nghệ & Doanh nghiệp**\n- Anthropic đã nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO). Trong khi đó, Nvidia ra mắt mô hình giả lập thế giới mới (world model simulator) dành cho robot và nền tảng thiết kế mới cho các nhà phát triển robot. Ngoài ra, một nhóm an toàn AI đã khởi động chiến dịch... - [The Washington Post](https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/)\n\n**Ứng dụng Ngành nghề**\n- Báo cáo mới từ Skift cho thấy ngành du lịch đang được tái cấu trúc toàn diện nhờ AI. Các trợ lý AI và trải nghiệm tự động (agentic experiences) đang định hình lại cách du khách tìm kiếm, đặt chỗ và quản lý các chuyến đi. - [Skift](https://skift.com/insights/the-ai-rebuild-of-travel/)\n",
+                "item_count": 4
+              }
+            }
+          ]
+        },
+        {
+          "round": 3,
+          "assistant_text": "Dưới đây là tổng hợp các tin tức nổi bật về trí tuệ nhân tạo (AI) trong ngày hôm nay:\n\n### **1. Quảng cáo & Kinh tế AI**\n* **AI dự kiến thúc đẩy 18 tỷ bảng chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030:** Dự báo từ IAB UK cho thấy AI sẽ chi phối khoảng 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030. Sự tăng trưởng này chủ yếu đến từ việc áp dụng các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và các giao dịch tự động (agentic programmatic buying). Chi tiết xem tại [Marketing Week](https://www.marketingweek.com/iab-uk-ai-ad-spend/).\n\n### **2. Hiệu quả đầu tư AI**\n* **Doanh nghiệp thất vọng vì AI không giúp tiết kiệm chi phí như kỳ vọng:** Báo cáo mới từ Bain & Company chỉ ra một thực tế đáng lo ngại: khoảng 40% doanh nghiệp theo dõi chi tiêu AI ghi nhận mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng ban đầu là 20%. Nguyên nhân lớn nhất được chỉ ra là do các doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa nguồn dữ liệu nội bộ của chính mình. Dù vậy, 90% doanh nghiệp vẫn có kế hoạch tiếp tục tăng ngân sách cho AI vào năm tới. Chi tiết xem tại [PitchBook](https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver).\n\n### **3. Tin tức Công nghệ & Doanh nghiệp**\n* **Anthropic nộp đơn IPO & Nvidia ra mắt giả lập robot mới:** \n  * Công ty khởi nghiệp AI đình đám **Anthropic** đã chính thức nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO).\n  * Trong khi đó, gã khổng lồ chip **Nvidia** vừa ra mắt một mô hình giả lập thế giới mới (world model simulator) dành cho robot cùng nền tảng thiết kế mới hỗ trợ các nhà phát triển robot, tiếp tục củng cố vị thế thống trị của mình. Chi tiết xem tại [The Washington Post](https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/).\n\n### **4. Ứng dụng Ngành nghề**\n* **AI tái định hình ngành du lịch toàn cầu:** Báo cáo mới từ Skift cho thấy ngành công nghiệp du lịch đang được tái cấu trúc toàn diện từ gốc rễ. Các trợ lý AI thông minh và trải nghiệm tự động (agentic experiences) đang thay đổi hoàn toàn cách du khách tìm kiếm thông tin, đặt chỗ và quản lý lịch trình chuyến đi của họ. Chi tiết xem tại [Skift](https://skift.com/insights/the-ai-rebuild-of-travel/).",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "lookup",
+          "args": {
+            "query": "AI",
+            "timeframe": "day",
+            "topic": "news"
+          },
+          "result": {
+            "tool": "web_search",
+            "query": "AI",
+            "topic": "news",
+            "timeframe": "day",
+            "items": [
+              {
+                "title": "AI expected to drive £18bn of UK digital ad spend by 2030 - Marketing Week",
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/",
+                "source": "marketingweek.com",
+                "summary": "# AI expected to drive £18bn of UK digital ad spend by 2030. IAB UK forecasts AI will drive one-third of UK digital ad spend by 2030 as advertisers adapt to changes in search, content and media buying. One-third (32%) of UK digital ad spend, equivalent to around £18bn, will be AI-driven by 2030, according to new forecasts from IAB UK. According to ‘The State of AI in Advertising: Charting the Shift from Automation to Autonomy, ‘ AI is expected to influence ad spend across four key areas– content creation, zero-click search, agentic trading and agentic commerce. To estimate the likely scale of change, IAB UK developed a series of ‘AI overlays’ that estimate the proportion of media spend by channel that is ‘AI-driven’, defined as a media buying and delivery decision made by an AI-powered algorithm. IAB UK forecasts most of the growth will come from the adoption of AI buying tools in search, such as Google’s AI Max and PMax; social, including Meta’s Advantage+; and display advertising through agentic programmatic buying.",
+                "score": 0.3331999
+              },
+              {
+                "title": "40% of executives thought AI could save up to 20%. It didn’t deliver. - PitchBook",
+                "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver",
+                "source": "pitchbook.com",
+                "summary": "## The gap between AI spending and productivity gains “should be making executives uncomfortable,” a Bain report found. Corporates are beefing up their AI budgets but seeing lackluster productivity gains, according to the latest Bain & Company report. Bain’s Automation and AI Pathfinder Survey 2026, which had 951 respondents, found that 40% of the companies that tracked their spending recorded cost savings of less than 10% from their AI initiatives. Still, 90% of those surveyed whose AI investments underdelivered plan to increase their AI budgets next year. As compute and usage costs have risen dramatically, executives and shareholders are taking a closer look at the returns that those investments have brought so far. A PitchBook analysis of 186 AI-related questions on B2C earnings calls found that 90% were probing and investigative in tone, and that ROI and financial returns have overtaken product roadmaps as the dominant focus. Employees’ use of AI tools can range from coding assistants to AI-generated research to organizing unstructured databases.",
+                "score": 0.26990628
+              },
+              {
+                "title": "AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan - The Washington Post",
+                "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/",
+                "source": "washingtonpost.com",
+                "summary": "AI & Tech Brief from WP Intelligence. # AI & Tech Brief: Exclusive | AI ad campaigns slam Trahan. Plus, Anthropic files for a blockbuster initial public offering. Make us preferred on Google. Sign up here to get this newsletter in your inbox. * **Exclusive:** AI safety group Americans for Responsible Innovation rolls out a six-figure ad campaign this week attacking Rep. Lori Trahan (D-Massachusetts), arguing that she’s “taking the side” of AI oligarchs in her bipartisan legislative efforts. * The AI safety community doesn’t want to hand power of AI regulation to President Donald Trump’s administration now that states are passing more rigorous AI laws — and the California and New York attorneys general are challenging big AI companies. * Nvidia is rolling out a new “world model” simulator for robots and a new design platform for robot developers. In doing so, the company is running the same business playbook it did to become so dominant in the chip market.",
+                "score": 0.23527569
+              },
+              {
+                "title": "AI Savings Misses ‘Should Be Making Executives Uncomfortable,’ Bain Says - Insurance Journal",
+                "url": "https://www.insurancejournal.com/news/national/2026/06/01/871951.htm",
+                "source": "insurancejournal.com",
+                "summary": "The missed targets “should be making executives uncomfortable,” especially since many of them are approving increased spending for artificial intelligence on the basis of expected savings, the consulting firm said in a report shared exclusively with Bloomberg News. While some companies are funding fresh investment in generative and agentic AI with realized savings, the largest share (44%) cited targeted savings among their top sources of funding for the next wave of outlays, according to the report. “Despite a decade of investments in data modernization running well into hundreds of billions of dollars globally, the No. 1 reason AI programs underperform is that companies cannot reliably get access to their own data,” Bain said. Its prescription: Instead of waiting to structure all of their data to make it ingestible by AI, companies should start with what’s available to feed into the models — and then use AI to help sort out how to structure the rest.",
+                "score": 0.22715242
+              },
+              {
+                "title": "New Report: The AI Rebuild of Travel - Skift",
+                "url": "https://skift.com/insights/the-ai-rebuild-of-travel/",
+                "source": "skift.com",
+                "summary": "# New Report: The AI Rebuild of Travel. Travel technology is being rebuilt in real time as AI begins to shape how trips are discovered, booked, and managed. And systems built for websites and manual workflows are struggling to keep pace with a more connected, autonomous future. What once operated as a predictable digital journey is becoming an AI-mediated ecosystem powered by real-time data, interoperability, and increasingly intelligent systems. Skift Studio spoke with 10 senior technology, product, and digital leaders across airlines, hospitality companies, travel platforms, and technology providers to understand how the industry is preparing. One thing is clear: the next era of travel will be defined by infrastructure as much as interface. **Download the report to learn:**. * How AI assistants and agentic experiences are reshaping travel discovery and booking. * Why trust, governance, and identity are becoming central to AI-powered travel. * How airlines, hotels, and platforms are preparing for a more autonomous future.",
+                "score": 0.20429464
+              }
+            ]
+          }
+        },
+        {
+          "tool": "format",
+          "args": {
+            "headline": "Tin tức AI nổi bật hôm nay",
+            "items": [
+              {
+                "section": "Quảng cáo & Kinh tế AI",
+                "source": "Marketing Week",
+                "summary": "Dự báo từ IAB UK cho thấy AI sẽ thúc đẩy 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030 (tương đương 18 tỷ bảng Anh), thông qua các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và giao dịch tự động (agentic programmatic buying).",
+                "title": "AI dự kiến thúc đẩy 18 tỷ bảng chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030",
+                "url": "https://www.marketingweek.com/iab-uk-ai-ad-spend/"
+              },
+              {
+                "section": "Hiệu quả đầu tư AI",
+                "source": "PitchBook & Insurance Journal",
+                "summary": "Báo cáo mới từ Bain & Company chỉ ra rằng 40% doanh nghiệp theo dõi chi tiêu AI chỉ đạt mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng 20%. Nguyên nhân lớn nhất là do doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa dữ liệu nội bộ. Dù vậy, 90% doanh nghiệp vẫn có kế hoạch tăng ngân sách AI vào năm tới.",
+                "title": "Doanh nghiệp thất vọng vì AI không giúp tiết kiệm chi phí như kỳ vọng",
+                "url": "https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver"
+              },
+              {
+                "section": "Tin tức Công nghệ & Doanh nghiệp",
+                "source": "The Washington Post",
+                "summary": "Anthropic đã nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO). Trong khi đó, Nvidia ra mắt mô hình giả lập thế giới mới (world model simulator) dành cho robot và nền tảng thiết kế mới cho các nhà phát triển robot. Ngoài ra, một nhóm an toàn AI đã khởi động chiến dịch quảng cáo chỉ trích Hạ nghị sĩ Lori Trahan vì các nỗ lực lập pháp của bà.",
+                "title": "Anthropic nộp đơn IPO; Nvidia ra mắt giả lập robot mới",
+                "url": "https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/"
+              },
+              {
+                "section": "Ứng dụng Ngành nghề",
+                "source": "Skift",
+                "summary": "Báo cáo mới từ Skift cho thấy ngành du lịch đang được tái cấu trúc toàn diện nhờ AI. Các trợ lý AI và trải nghiệm tự động (agentic experiences) đang định hình lại cách du khách tìm kiếm, đặt chỗ và quản lý các chuyến đi.",
+                "title": "AI tái định hình ngành du lịch toàn cầu",
+                "url": "https://skift.com/insights/the-ai-rebuild-of-travel/"
+              }
+            ],
+            "template": "daily_ai_vn"
+          },
+          "result": {
+            "tool": "render_digest",
+            "template": "daily_ai_vn",
+            "markdown": "**Tin tức AI nổi bật hôm nay**\n\n**Quảng cáo & Kinh tế AI**\n- Dự báo từ IAB UK cho thấy AI sẽ thúc đẩy 1/3 chi tiêu quảng cáo kỹ thuật số tại Anh vào năm 2030 (tương đương 18 tỷ bảng Anh), thông qua các công cụ mua quảng cáo tự động như Google AI Max, Meta Advantage+ và giao dịch tự động (agentic programmatic buying). - [Marketing Week](https://www.marketingweek.com/iab-uk-ai-ad-spend/)\n\n**Hiệu quả đầu tư AI**\n- Báo cáo mới từ Bain & Company chỉ ra rằng 40% doanh nghiệp theo dõi chi tiêu AI chỉ đạt mức tiết kiệm chi phí dưới 10%, thấp hơn nhiều so với kỳ vọng 20%. Nguyên nhân lớn nhất là do doanh nghiệp gặp khó khăn trong việc tiếp cận và chuẩn hóa dữ liệu nội bộ. Dù vậy, 90% doanh ng... - [PitchBook & Insurance Journal](https://pitchbook.com/news/articles/40-of-executives-thought-ai-could-save-up-to-20-it-didnt-deliver)\n\n**Tin tức Công nghệ & Doanh nghiệp**\n- Anthropic đã nộp đơn xin phát hành cổ phiếu lần đầu ra công chúng (IPO). Trong khi đó, Nvidia ra mắt mô hình giả lập thế giới mới (world model simulator) dành cho robot và nền tảng thiết kế mới cho các nhà phát triển robot. Ngoài ra, một nhóm an toàn AI đã khởi động chiến dịch... - [The Washington Post](https://www.washingtonpost.com/wp-intelligence/ai-tech-brief/2026/06/01/ai-tech-brief-exclusive-ai-ad-campaigns-slam-trahan/)\n\n**Ứng dụng Ngành nghề**\n- Báo cáo mới từ Skift cho thấy ngành du lịch đang được tái cấu trúc toàn diện nhờ AI. Các trợ lý AI và trải nghiệm tự động (agentic experiences) đang định hình lại cách du khách tìm kiếm, đặt chỗ và quản lý các chuyến đi. - [Skift](https://skift.com/insights/the-ai-rebuild-of-travel/)\n",
+            "item_count": 4
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T18:07:49"
+    },
+    {
+      "turn_index": 2,
+      "started_at": "2026-06-02T18:07:49",
+      "user": "C? th?ng tin g? v? account n?y tr?n X/Twitter kh?ng?",
+      "status": "waiting_for_user",
+      "assistant_text": "Bạn có thể cung cấp tên tài khoản (username hoặc handle bắt đầu bằng chữ @) trên X/Twitter mà bạn muốn tìm kiếm thông tin không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "clarify",
+              "args": {
+                "question": "Bạn có thể cung cấp tên tài khoản (username hoặc handle bắt đầu bằng chữ @) trên X/Twitter mà bạn muốn tìm kiếm thông tin không?",
+                "response_type": "text"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "clarify",
+              "args": {
+                "question": "Bạn có thể cung cấp tên tài khoản (username hoặc handle bắt đầu bằng chữ @) trên X/Twitter mà bạn muốn tìm kiếm thông tin không?",
+                "response_type": "text"
+              },
+              "result": {
+                "tool": "ask_user",
+                "question": "Bạn có thể cung cấp tên tài khoản (username hoặc handle bắt đầu bằng chữ @) trên X/Twitter mà bạn muốn tìm kiếm thông tin không?",
+                "response_type": "text",
+                "options": [],
+                "awaiting_user": true
+              }
+            }
+          ]
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có thể cung cấp tên tài khoản (username hoặc handle bắt đầu bằng chữ @) trên X/Twitter mà bạn muốn tìm kiếm thông tin không?",
+            "response_type": "text"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có thể cung cấp tên tài khoản (username hoặc handle bắt đầu bằng chữ @) trên X/Twitter mà bạn muốn tìm kiếm thông tin không?",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T18:07:54"
+    },
+    {
+      "turn_index": 3,
+      "started_at": "2026-06-02T18:07:54",
+      "user": "@vinuni_ai",
+      "status": "answered",
+      "assistant_text": "Hiện tại, không có bài đăng gần đây nào được tìm thấy trên tài khoản X/Twitter `@vinuni_ai` (hệ thống trả về kết quả trống). \n\nTài khoản này có thể đang không hoạt động, không có bài đăng công khai gần đây, hoặc tên định danh (handle) có thể có chút khác biệt. Nếu bạn muốn, tôi có thể tìm kiếm các bài đăng nhắc đến \"VinUni AI\" từ các tài khoản khác trên X để xem có thông tin gì liên quan không.",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "timeline",
+              "args": {
+                "screenname": "vinuni_ai"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "timeline",
+              "args": {
+                "screenname": "vinuni_ai"
+              },
+              "result": {
+                "tool": "get_user_tweets",
+                "screenname": "vinuni_ai",
+                "items": []
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Hiện tại, không có bài đăng gần đây nào được tìm thấy trên tài khoản X/Twitter `@vinuni_ai` (hệ thống trả về kết quả trống). \n\nTài khoản này có thể đang không hoạt động, không có bài đăng công khai gần đây, hoặc tên định danh (handle) có thể có chút khác biệt. Nếu bạn muốn, tôi có thể tìm kiếm các bài đăng nhắc đến \"VinUni AI\" từ các tài khoản khác trên X để xem có thông tin gì liên quan không.",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "timeline",
+          "args": {
+            "screenname": "vinuni_ai"
+          },
+          "result": {
+            "tool": "get_user_tweets",
+            "screenname": "vinuni_ai",
+            "items": []
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T18:08:07"
+    },
+    {
+      "turn_index": 4,
+      "started_at": "2026-06-02T18:08:07",
+      "user": "G?i k?t qu? v?a r?i th?nh 1 tin nh?n l?n Telegram ?i.",
+      "status": "waiting_for_user",
+      "assistant_text": "Bạn có đồng ý gửi thông tin kết quả vừa rồi lên Telegram không?",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "clarify",
+              "args": {
+                "question": "Bạn có đồng ý gửi thông tin kết quả vừa rồi lên Telegram không?",
+                "response_type": "yes_no"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "clarify",
+              "args": {
+                "question": "Bạn có đồng ý gửi thông tin kết quả vừa rồi lên Telegram không?",
+                "response_type": "yes_no"
+              },
+              "result": {
+                "tool": "ask_user",
+                "question": "Bạn có đồng ý gửi thông tin kết quả vừa rồi lên Telegram không?",
+                "response_type": "yes_no",
+                "options": [],
+                "awaiting_user": true
+              }
+            }
+          ]
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có đồng ý gửi thông tin kết quả vừa rồi lên Telegram không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "ask_user",
+            "question": "Bạn có đồng ý gửi thông tin kết quả vừa rồi lên Telegram không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T18:08:12"
+    },
+    {
+      "turn_index": 5,
+      "started_at": "2026-06-02T18:08:12",
+      "user": "C?",
+      "status": "answered",
+      "assistant_text": "Rất tiếc, hệ thống không thể gửi tin nhắn lên Telegram lúc này do thiếu cấu hình kết nối (`TELEGRAM_BOT_TOKEN` hoặc `TELEGRAM_CHAT_ID`). \n\nTuy nhiên, đây là nội dung thông báo đã được chuẩn bị sẵn để bạn có thể tự sao chép và gửi thủ công:\n\n> **Kết quả kiểm tra tài khoản @vinuni_ai trên X/Twitter:** Hiện tại không tìm thấy bài đăng gần đây nào từ tài khoản này (hệ thống trả về kết quả trống).",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "send",
+              "args": {
+                "confirmed": true,
+                "text": "Kết quả kiểm tra tài khoản @vinuni_ai trên X/Twitter: Hiện tại không tìm thấy bài đăng gần đây nào từ tài khoản này (hệ thống trả về kết quả trống)."
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "send",
+              "args": {
+                "confirmed": true,
+                "text": "Kết quả kiểm tra tài khoản @vinuni_ai trên X/Twitter: Hiện tại không tìm thấy bài đăng gần đây nào từ tài khoản này (hệ thống trả về kết quả trống)."
+              },
+              "result": {
+                "tool": "send_telegram",
+                "error": "RuntimeError",
+                "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "Rất tiếc, hệ thống không thể gửi tin nhắn lên Telegram lúc này do thiếu cấu hình kết nối (`TELEGRAM_BOT_TOKEN` hoặc `TELEGRAM_CHAT_ID`). \n\nTuy nhiên, đây là nội dung thông báo đã được chuẩn bị sẵn để bạn có thể tự sao chép và gửi thủ công:\n\n> **Kết quả kiểm tra tài khoản @vinuni_ai trên X/Twitter:** Hiện tại không tìm thấy bài đăng gần đây nào từ tài khoản này (hệ thống trả về kết quả trống).",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "send",
+          "args": {
+            "confirmed": true,
+            "text": "Kết quả kiểm tra tài khoản @vinuni_ai trên X/Twitter: Hiện tại không tìm thấy bài đăng gần đây nào từ tài khoản này (hệ thống trả về kết quả trống)."
+          },
+          "result": {
+            "tool": "send_telegram",
+            "error": "RuntimeError",
+            "message": "Missing TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID env var"
+          }
+        }
+      ],
+      "ended_at": "2026-06-02T18:08:21"
+    }
+  ]
+}
