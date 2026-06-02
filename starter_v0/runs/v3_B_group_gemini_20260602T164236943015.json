@@ -1,0 +1,310 @@
+{
+  "run_id": "v3_B_group_gemini_20260602T164236943015",
+  "version": "v3",
+  "artifact_version": "v3+pa616fea3104b+t024bd9589a0a",
+  "prompt_hash": "a616fea3104b2bf5f9f0ef9d6e8a1788c296d308216e3443c2b9613453a1f20b",
+  "tools_hash": "024bd9589a0a7286e807d8c2d43af4d44b40d71528af98bb5f76053c57187b2b",
+  "phase": "B",
+  "suite": "group",
+  "provider": "gemini",
+  "model": "gemini-2.5-flash",
+  "system_prompt": "C:\\Vin\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\Vin\\Day04-C401-Prompt-Engineering-Tool-Calling-Labs-student-3changlinhngulam\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "dataset_id": "day04_group_m2_tools",
+  "dataset_role": "group",
+  "description": "Group eval cases for M2 added tools: url_cleaner, source_quality, extract_entities, dedupe_sources.",
+  "generated_at": "2026-06-02T16:42:36",
+  "summary": {
+    "total_cases": 8,
+    "measured_cases": 0,
+    "provider_error_cases": 8,
+    "passed_cases": 0,
+    "case_accuracy": 0.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_url_cleaner_tracking_params",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "url_cleaning"
+      },
+      "input": "Làm sạch link này trước khi đưa vào citation: https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "url": "https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G02_url_cleaner_plain_domain",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "url_cleaning"
+      },
+      "input": "Chuẩn hóa URL này giúp mình trước khi fetch: example.com/news?id=7&utm_campaign=test",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "url": "example.com/news?id=7&utm_campaign=test"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G03_source_quality_medical",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_quality"
+      },
+      "input": "Đánh giá chất lượng nguồn này cho một claim y tế: https://www.who.int/news-room",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "url": "https://www.who.int/news-room",
+              "claim_type": "medical"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G04_source_quality_shortlink",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_quality"
+      },
+      "input": "Nguồn bit.ly/ai-report này có đáng tin để dùng trong report không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "url": "bit.ly/ai-report"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G05_extract_entities_text",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "entity_extraction"
+      },
+      "input": "Trích xuất entity trong đoạn này: VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "text": "VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD."
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G06_extract_entities_max_items",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "entity_extraction"
+      },
+      "input": "Lấy tối đa 5 entity mỗi loại từ đoạn sau: Email support@example.com, ngày 2026-06-02, link https://example.com, hashtag #AI.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "max_items": 5
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G07_dedupe_sources_by_url",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_deduplication"
+      },
+      "input": "Loại trùng danh sách nguồn sau theo URL: [{\"title\":\"AI news\",\"url\":\"https://example.com/a?utm_source=x\"}, {\"title\":\"AI news\",\"url\":\"https://example.com/a\"}, {\"title\":\"Other report\",\"url\":\"https://another.com/report\"}]",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "unique_by": "url"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "G08_dedupe_sources_by_domain",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "source_deduplication"
+      },
+      "input": "Trong danh sách nguồn này, chỉ giữ một nguồn mỗi domain: [{\"title\":\"Report 1\",\"url\":\"https://example.com/a\"}, {\"title\":\"Report 2\",\"url\":\"https://example.com/b\"}, {\"title\":\"Report 3\",\"url\":\"https://openai.com/news\"}]",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "unique_by": "domain"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "RuntimeError: Missing API key env var: GEMINI_API_KEY"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    }
+  ]
+}

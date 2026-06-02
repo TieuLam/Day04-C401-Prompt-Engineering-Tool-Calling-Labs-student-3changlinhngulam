@@ -118,6 +118,7 @@ tools:
       required: [arxiv_url]
 
   # ---------------- M2 added tools ----------------
+
   - name: url_cleaner
     description: "Làm sạch URL trước khi fetch/cite bằng cách bỏ tracking params như utm_*, fbclid, gclid; giữ lại query params quan trọng."
     parameters:
@@ -183,4 +184,3 @@ tools:
           description: "Tiêu chí lọc trùng"
         max_items: {type: integer, default: 20, description: "Số item unique tối đa trả về"}
       required: [items]
-

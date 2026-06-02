@@ -1,5 +1,5 @@
 {
-  "dataset_id": "day04_v2_research_group",
+  "dataset_id": "day04_group_m2_tools",
   "dataset_role": "group",
   "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
@@ -103,6 +103,167 @@
       "failure_type": "out_of_scope",
       "expect": {"no_tool": true, "behavior": "refuse"},
       "metadata": {"what_it_tests": "Multiturn: Yêu cầu code nằm ngoài phạm vi research, agent vẫn phải từ chối dù user nài nỉ qua nhiều turn."}
+    },
+    {
+      "id": "G11_url_cleaner_tracking_params",
+      "phase": "B",
+      "suite": "group",
+      "query": "Làm sạch link này trước khi đưa vào citation: https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "url": "https://example.com/article?id=123&utm_source=facebook&utm_medium=social&fbclid=abc#comments"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "url_cleaning"
+      }
+    },
+    {
+      "id": "G12_url_cleaner_plain_domain",
+      "phase": "B",
+      "suite": "group",
+      "query": "Chuẩn hóa URL này giúp mình trước khi fetch: example.com/news?id=7&utm_campaign=test",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "url_cleaner",
+            "args": {
+              "url": "example.com/news?id=7&utm_campaign=test"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "url_cleaning"
+      }
+    },
+    {
+      "id": "G13_source_quality_medical",
+      "phase": "B",
+      "suite": "group",
+      "query": "Đánh giá chất lượng nguồn này cho một claim y tế: https://www.who.int/news-room",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "url": "https://www.who.int/news-room",
+              "claim_type": "medical"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "source_quality"
+      }
+    },
+    {
+      "id": "G14_source_quality_shortlink",
+      "phase": "B",
+      "suite": "group",
+      "query": "Nguồn bit.ly/ai-report này có đáng tin để dùng trong report không?",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "source_quality",
+            "args": {
+              "url": "bit.ly/ai-report"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "source_quality"
+      }
+    },
+    {
+      "id": "G15_extract_entities_text",
+      "phase": "B",
+      "suite": "group",
+      "query": "Trích xuất entity trong đoạn này: VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD.",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "text": "VinUni announced the AI program on 28/05/2026. Contact ai@vinuni.edu.vn or visit https://vinuni.edu.vn. Tuition is 100 USD."
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "entity_extraction"
+      }
+    },
+    {
+      "id": "G16_extract_entities_max_items",
+      "phase": "B",
+      "suite": "group",
+      "query": "Lấy tối đa 5 entity mỗi loại từ đoạn sau: Email support@example.com, ngày 2026-06-02, link https://example.com, hashtag #AI.",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "extract_entities",
+            "args": {
+              "max_items": 5
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "entity_extraction"
+      }
+    },
+    {
+      "id": "G17_dedupe_sources_by_url",
+      "phase": "B",
+      "suite": "group",
+      "query": "Loại trùng danh sách nguồn sau theo URL: [{\"title\":\"AI news\",\"url\":\"https://example.com/a?utm_source=x\"}, {\"title\":\"AI news\",\"url\":\"https://example.com/a\"}, {\"title\":\"Other report\",\"url\":\"https://another.com/report\"}]",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "unique_by": "url"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "source_deduplication"
+      }
+    },
+    {
+      "id": "G18_dedupe_sources_by_domain",
+      "phase": "B",
+      "suite": "group",
+      "query": "Trong danh sách nguồn này, chỉ giữ một nguồn mỗi domain: [{\"title\":\"Report 1\",\"url\":\"https://example.com/a\"}, {\"title\":\"Report 2\",\"url\":\"https://example.com/b\"}, {\"title\":\"Report 3\",\"url\":\"https://openai.com/news\"}]",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "dedupe_sources",
+            "args": {
+              "unique_by": "domain"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "source_deduplication"
+      }
     }
   ]
 }
