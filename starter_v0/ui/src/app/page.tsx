@@ -20,8 +20,9 @@ export default function Home() {
     }
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = (e: React.FormEvent) => {
+  const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -32,27 +33,55 @@ export default function Home() {
     };
     setMessages((prev) => [...prev, userMsg]);
     setInput('');
+    setIsLoading(true);
 
-    // Mocking an agent response with a tool call
-    setTimeout(() => {
-      const toolMsg: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'tool',
-        content: 'Đang thực thi công cụ...',
-        toolName: 'social_search',
-        toolArgs: { query: input, search_type: 'Latest' },
-      };
-      setMessages((prev) => [...prev, toolMsg]);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: input }),
+      });
+      const data = await response.json();
 
-      setTimeout(() => {
-        const agentMsg: Message = {
-          id: (Date.now() + 2).toString(),
+      if (data.error) {
+        setMessages((prev) => [...prev, {
+          id: Date.now().toString(),
           role: 'agent',
-          content: `Tôi đã tìm kiếm trên Twitter về "${input}" và tìm thấy một số cuộc thảo luận mới nhất rất thú vị!`,
-        };
-        setMessages((prev) => [...prev, agentMsg]);
-      }, 1500);
-    }, 1000);
+          content: `Lỗi: ${data.error}`
+        }]);
+        return;
+      }
+
+      // Render tool calls
+      if (data.tool_events && data.tool_events.length > 0) {
+        data.tool_events.forEach((event: any, index: number) => {
+          setMessages((prev) => [...prev, {
+            id: Date.now().toString() + '-tool-' + index,
+            role: 'tool',
+            content: 'Đang thực thi công cụ...',
+            toolName: event.tool,
+            toolArgs: event.args,
+          }]);
+        });
+      }
+
+      // Render final text
+      if (data.assistant_text) {
+        setMessages((prev) => [...prev, {
+          id: (Date.now() + 100).toString(),
+          role: 'agent',
+          content: data.assistant_text,
+        }]);
+      }
+    } catch (err) {
+      setMessages((prev) => [...prev, {
+        id: Date.now().toString(),
+        role: 'agent',
+        content: `Đã xảy ra lỗi khi kết nối với agent.`
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -108,6 +137,18 @@ export default function Home() {
               </div>
             </div>
           ))}
+          {isLoading && (
+            <div className="flex flex-col items-start animate-fade-in">
+              <div className="max-w-[80%] rounded-2xl p-4 bg-white/10 text-gray-100 rounded-tl-none flex items-center space-x-3">
+                <div className="flex space-x-1">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                  <div className="w-2 h-2 bg-pink-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                </div>
+                <span className="text-sm font-medium text-gray-400 animate-pulse">Đang suy nghĩ & tìm kiếm...</span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Input Area */}
@@ -117,12 +158,13 @@ export default function Home() {
               type="text" 
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              disabled={isLoading}
               placeholder="Hỏi trợ lý nghiên cứu..." 
-              className="flex-1 bg-transparent px-4 py-2 outline-none text-white placeholder-gray-500"
+              className="flex-1 bg-transparent px-4 py-2 outline-none text-white placeholder-gray-500 disabled:opacity-50"
             />
             <button 
               type="submit"
-              disabled={!input.trim()}
+              disabled={!input.trim() || isLoading}
               className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-400 hover:to-purple-400 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-full p-2 transition-all duration-200"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
