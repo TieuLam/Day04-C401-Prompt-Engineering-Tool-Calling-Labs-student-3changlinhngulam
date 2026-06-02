@@ -116,3 +116,71 @@ tools:
         max_pages: {type: integer, default: 5, description: "Số trang"}
         max_chars: {type: integer, default: 8000, description: "Số ký tự"}
       required: [arxiv_url]
+
+  # ---------------- M2 added tools ----------------
+  - name: url_cleaner
+    description: "Làm sạch URL trước khi fetch/cite bằng cách bỏ tracking params như utm_*, fbclid, gclid; giữ lại query params quan trọng."
+    parameters:
+      type: object
+      properties:
+        url: {type: string, default: "", description: "URL cần làm sạch"}
+        keep_params:
+          type: array
+          default: []
+          items: {type: string}
+          description: "Danh sách query params luôn giữ lại"
+        remove_params:
+          type: array
+          default: []
+          items: {type: string}
+          description: "Danh sách query params bổ sung cần xóa"
+        remove_fragment: {type: boolean, default: true, description: "Có xóa phần #fragment hay không"}
+      required: [url]
+
+  - name: source_quality
+    description: "Đánh giá sơ bộ chất lượng nguồn dựa trên URL/domain; dùng để ưu tiên nguồn official, academic, news và cảnh báo social/blog/shortlink."
+    parameters:
+      type: object
+      properties:
+        url: {type: string, default: "", description: "URL nguồn cần đánh giá"}
+        claim_type:
+          type: string
+          enum: [general, medical, legal, financial, safety]
+          default: "general"
+          description: "Loại claim để tăng cảnh báo khi cần nguồn mạnh hơn"
+      required: [url]
+
+  - name: extract_entities
+    description: "Trích xuất entity từ text: URL, email, ngày tháng, tiền tệ, hashtag, mention, và tên tổ chức có khả năng xuất hiện."
+    parameters:
+      type: object
+      properties:
+        text: {type: string, default: "", description: "Văn bản cần trích xuất entity"}
+        max_items: {type: integer, default: 20, description: "Số item tối đa cho mỗi nhóm"}
+      required: [text]
+
+  - name: dedupe_sources
+    description: "Loại nguồn trùng lặp trong danh sách kết quả lookup/social/fetch theo URL, domain, title hoặc url_or_title."
+    parameters:
+      type: object
+      properties:
+        items:
+          type: array
+          default: []
+          description: "Danh sách source item cần lọc trùng"
+          items:
+            type: object
+            properties:
+              title: {type: string}
+              url: {type: string}
+              source: {type: string}
+              summary: {type: string}
+              section: {type: string}
+        unique_by:
+          type: string
+          enum: [url, domain, title, url_or_title]
+          default: "url"
+          description: "Tiêu chí lọc trùng"
+        max_items: {type: integer, default: 20, description: "Số item unique tối đa trả về"}
+      required: [items]
+
