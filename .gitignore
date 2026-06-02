@@ -17,8 +17,13 @@ starter/
 # Tool scratch output
 arxiv_papers/
 
+
 # OS / editor
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
+**/node_modules/
+**/.next/
+**/build/
+**/out/

@@ -3,5 +3,46 @@
   "dataset_role": "group",
   "description": "Case do NHÓM tự viết thêm để cover thêm trường hợp. Mỗi case cần: id, phase='B', query HOẶC turns, failure_type (thuộc allowed_failure_types), và expect (tool_calls[...] hoặc no_tool=true). Nên kèm metadata.what_it_tests.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_search_latest_tweets",
+      "phase": "B",
+      "query": "Tìm các bài tweet mới nhất về trí tuệ nhân tạo",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"search_type": "Latest", "query": "trí tuệ nhân tạo"}}]},
+      "metadata": {"what_it_tests": "Từ khóa 'mới nhất' phải map chính xác vào search_type='Latest' của social_search."}
+    },
+    {
+      "id": "G02_missing_screenname",
+      "phase": "B",
+      "query": "Lấy bài đăng gần đây của tổng thống Mỹ",
+      "failure_type": "missing_info",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "text"}}]},
+      "metadata": {"what_it_tests": "User ám chỉ một người nhưng không cung cấp username/handle rõ ràng, agent phải dùng clarify để hỏi lại, KHÔNG ĐƯỢC đoán bừa handle."}
+    },
+    {
+      "id": "G03_social_search_vs_timeline",
+      "phase": "B",
+      "query": "Mọi người đang nói gì về @elonmusk trên Twitter?",
+      "failure_type": "wrong_tool",
+      "expect": {"tool_calls": [{"name": "social_search", "args": {"query": "@elonmusk"}}]},
+      "metadata": {"what_it_tests": "Tìm kiếm BÀN LUẬN về một user thì phải dùng social_search, không được dùng timeline (timeline chỉ lấy bài do chính user đó đăng)."}
+    },
+    {
+      "id": "G04_unnecessary_greeting",
+      "phase": "B",
+      "query": "Xin chào, bạn có thể giúp tôi tìm kiếm thông tin không?",
+      "failure_type": "unnecessary_tool",
+      "expect": {"no_tool": true, "behavior": "answer_without_tool"},
+      "metadata": {"what_it_tests": "Câu chào hỏi thông thường, không chứa yêu cầu cụ thể. Agent phải trả lời trực tiếp mà không gọi tool."}
+    },
+    {
+      "id": "G05_email_out_of_scope",
+      "phase": "B",
+      "query": "Gửi email cho sếp tóm tắt tin tức AI hôm nay nhé",
+      "failure_type": "out_of_scope",
+      "expect": {"no_tool": true, "behavior": "refuse"},
+      "metadata": {"what_it_tests": "Yêu cầu gửi email nằm ngoài khả năng của agent, agent phải từ chối (refuse)."}
+    }
+  ]
 }
