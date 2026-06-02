@@ -270,6 +270,7 @@ def main() -> None:
     parser.add_argument("--tools", type=Path, default=ARTIFACTS_DIR / "tools.yaml")
     parser.add_argument("--eval-cases", type=Path, default=DATA_DIR / "eval_base.json")
     parser.add_argument("--runs-dir", type=Path, default=ROOT / "runs")
+    parser.add_argument("--delay", type=float, default=None, help="Delay in seconds between case executions to avoid rate limits.")
     args = parser.parse_args()
 
     system_prompt = args.system_prompt.read_text(encoding="utf-8")
@@ -285,8 +286,23 @@ def main() -> None:
     validate_expected_tools(cases, tool_declarations, args.eval_cases)
     openai_tools = to_openai_tools(tool_declarations)
 
+    # Determine default delay if not specified to respect rate limits
+    delay = args.delay
+    if delay is None:
+        if args.provider == "gemini":
+            if selected_model and "2.5" in selected_model:
+                delay = 12.0  # 5 RPM limit -> sleep 12s between runs
+            else:
+                delay = 4.0   # 15 RPM limit -> sleep 4s between runs
+        else:
+            delay = 0.0
+
     results: list[dict[str, Any]] = []
-    for case in cases:
+    import time
+    for index, case in enumerate(cases):
+        if index > 0 and delay > 0:
+            print(f"Sleeping {delay}s to respect Gemini rate limits...", flush=True)
+            time.sleep(delay)
         print(f"Running {case['id']}...", flush=True)
         agent = ResearchAgent(provider, system_prompt=system_prompt, tools=openai_tools, model=args.model)
         try:
